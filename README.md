@@ -1,3 +1,11 @@
+## 🌐 Live Demo
+
+**Try the website:** [Credit Risk Decision Support System](https://credit-risk-decision-support-system.onrender.com)
+
+Explore the website to enter applicant details and view the model's loan-default risk prediction.
+
+**Note:** This is an educational machine learning project, not a production-ready lending system.
+
 # Credit Risk Prediction Project
 
 A learning project that uses historical loan data to estimate loan-default risk. It includes the original Python modeling script, an updated end-to-end architecture for a Flask web app, and a short PDF summary of the model evaluation. **Power BI has been removed; the other project components remain in the planned architecture, including Excel logging.**
