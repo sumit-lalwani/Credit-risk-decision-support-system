@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prediction Result | CreditLens</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page-shell result-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="CreditLens home"><span class="brand-mark">CL</span><span class="brand-name">credit<span>lens</span></span></a>
+      <div class="topbar-right"><span class="live-dot"></span> PREDICTION COMPLETE</div>
+    </header>
+
+    <main class="result-main">
+      <p class="eyebrow"><span class="eyebrow-line"></span> MODEL OUTPUT / 01</p>
+      <h1 class="result-title">Your risk snapshot.</h1>
+      <p class="result-subtitle">The model estimated the probability of default from the submitted applicant profile.</p>
+
+      <section class="result-grid">
+        <div class="probability-card">
+          <div class="card-topline"><span>ESTIMATED DEFAULT PROBABILITY</span><span class="card-star">✳</span></div>
+          <div class="probability-value">{{ probability }}<span>%</span></div>
+          <div class="probability-track"><div class="probability-fill" style="width: {{ probability }}%;"></div></div>
+          <div class="scale-labels"><span>0% · Lower estimated probability</span><span>100%</span></div>
+          <div class="result-divider"></div>
+          <div class="classification-row"><div><span class="micro-label">MODEL CLASSIFICATION</span><h2>{{ status_label }}</h2></div><span class="class-chip {% if predicted_status == 1 %}chip-high{% else %}chip-low{% endif %}">{{ predicted_status }}</span></div>
+          <p class="small-note">This 0/1 classification uses a demonstration threshold of {{ threshold }}%. It is not a loan approval or rejection decision.</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="card-topline"><span>APPLICANT SUMMARY</span><span class="profile-icon">◎</span></div>
+          <div class="profile-list">
+            <div><span>Age</span><b>{{ applicant.age }}</b></div>
+            <div><span>Annual income</span><b>{{ applicant.annual_income }}</b></div>
+            <div><span>Home ownership</span><b>{{ applicant.home_ownership }}</b></div>
+            <div><span>Employment length</span><b>{{ applicant.employment_length }}</b></div>
+            <div><span>Loan purpose</span><b>{{ applicant.loan_intent }}</b></div>
+            <div><span>Loan grade</span><b class="grade-value">{{ applicant.loan_grade }}</b></div>
+            <div><span>Loan amount</span><b>{{ applicant.loan_amount }}</b></div>
+            <div><span>Interest rate</span><b>{{ applicant.interest_rate }}</b></div>
+            <div><span>Loan / income ratio</span><b>{{ applicant.loan_to_income }}</b></div>
+            <div><span>Previous default on file</span><b>{{ applicant.previous_default }}</b></div>
+            <div><span>Credit history</span><b>{{ applicant.credit_history }}</b></div>
+          </div>
+          <a class="edit-link" href="/">← Edit applicant details</a>
+        </div>
+      </section>
+
+      <div class="result-callout"><span class="callout-mark">i</span><p><b>How to read this result</b><br>The probability is the model's estimate based on patterns in the historical training data. The model's 0/1 label is generated using a 50% demo threshold. It should not be treated as a calibrated real-world probability or a lending decision without further validation.</p></div>
+    </main>
+    <footer class="site-footer"><span>CreditLens <span class="muted">/ Academic project demo</span></span><span><a href="/">Run another estimate ↗</a></span></footer>
+  </div>
+</body>
+</html>
